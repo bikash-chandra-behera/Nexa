@@ -31,6 +31,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "93a4e4fb-365c-456a-b58f-bd7195d44cff"
+      }
+    },
+    "owner": "bksbhr"
   }
 }
