@@ -5,10 +5,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Home() {
   return (
 <SafeAreaView>
-   <View>
+   <View className=' bg-primary h-full w-full' >
+    
 
     
-     <Text>HELLO</Text>
+     <Text className=' text-white'>HELLO</Text>
    </View>
 </SafeAreaView>
     
