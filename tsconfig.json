@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/store.js", "app/features/webSocketSlice.js", "app/(tabs)/index.jsx", "app/index.jsx"  ]
 }
