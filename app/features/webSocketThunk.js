@@ -1,6 +1,8 @@
 import { setConnected, setDisconnected, setError, updateLtpData } from './webSocketSlice';
+
+let ws = null;
 export const connectWebSocket = (symbols) => (dispatch) => {
-    const ws = new WebSocket('ws://192.168.29.104:8080');
+    ws = new WebSocket('ws://192.168.29.104:8080');
     
     ws.onopen = () => {
       dispatch(setConnected());
@@ -23,6 +25,21 @@ export const connectWebSocket = (symbols) => (dispatch) => {
       console.log('WebSocket closed:', e.code, e.reason);
     };
   
-    return ws;
+    
   };
-  
+  export const subscribeToSymbol = (newSymbol) => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type: 'subscribe', symbols: [newSymbol] }));
+      console.log(`Subscribed to ${newSymbol}`);
+    } else {
+      console.error('WebSocket is not open');
+    }
+  };
+  export const unSubscribeToSymbol = (newSymbol) => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type: 'unsubscribe', symbols: [newSymbol] }));
+      console.log(`UNSubscribed to ${newSymbol}`);
+    } else {
+      console.error('WebSocket is not open');
+    }
+  };

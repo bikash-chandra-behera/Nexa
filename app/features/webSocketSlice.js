@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    
     ltpData:[],
     isConnected:false,
     error:null,
@@ -10,8 +11,9 @@ export const webSocketSlice = createSlice({
     name:"webSocket",
     initialState,
     reducers:{
-        setConnected:(state)=>{
+        setConnected:(state,action)=>{
             state.isConnected =true;
+            state.ws = action.payload;
         },
         setDisconnected:(state)=>{
             state.isConnected =false;
@@ -33,10 +35,13 @@ export const webSocketSlice = createSlice({
                 state.ltpData.push(item);
               }
             });
+        },
+        removeSymbol: (state, action) => {
+          const symbolToRemove = action.payload;
+          state.ltpData = state.ltpData.filter((item) => item.symbol !== symbolToRemove);
         }
-
     }
 })
-export const { setConnected, setDisconnected, setError, updateLtpData } = webSocketSlice.actions;
+export const { setConnected, setDisconnected, setError, updateLtpData,removeSymbol} = webSocketSlice.actions;
 
 export default webSocketSlice.reducer;
